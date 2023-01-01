@@ -8,6 +8,7 @@ import Main from "./components/Main";
 import Play from "./components/Play";
 import Rules from "./components/Rules";
 import Footer from "./components/Footer";
+import { useState } from "react";
 
 const Container = styled.div`
   padding: 2rem 8rem;
@@ -15,20 +16,18 @@ const Container = styled.div`
   background: ${(props) => props.theme.RadialGradient};
 `;
 function App() {
+  const [show, setShow] = useState(false);
+  const handelClick = () => {};
   return (
     <>
       <GlobalStyles />
       <ThemeProvider theme={ColorTheme}>
         <Container>
           <Header />
-          {/* <Routes>
-          <Route path="/">
-            <Main />
-          </Route>
-          <Route path="/play">
-            <Play />
-          </Route>
-        </Routes> */}
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/play" element={<Play />} />
+          </Routes>
           <Rules />
           <Footer />
         </Container>

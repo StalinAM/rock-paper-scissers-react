@@ -8,7 +8,8 @@ export const ColorTheme = {
   DarkText: "hsl(229, 25%, 31%)",
   ScoreText: " hsl(229, 64%, 46%)",
   HeaderOutline: "hsl(217, 16%, 45%)",
-  White:"#f8f8f8",
+  White: "#f8f8f8",
 
-  RadialGradient: "radial-gradient(hsl(214, 47%, 23%), hsl(237, 49%, 15%))",
+  RadialGradient:
+    "radial-gradient(circle at top,hsl(214, 47%, 23%), hsl(237, 49%, 15%))",
 };
