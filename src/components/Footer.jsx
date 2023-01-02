@@ -7,6 +7,7 @@ const Container = styled.footer`
   transform: translate(-50%, 0);
 `;
 const Atribution = styled.p`
+  letter-spacing: 2px;
   font-size: 1.1rem;
   color: ${(props) => props.theme.HeaderOutline};
 `;

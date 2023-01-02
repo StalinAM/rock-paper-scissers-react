@@ -10,7 +10,8 @@ const Container = styled.div`
   background-color: ${(props) => props.theme.White};
   border-radius: 1rem;
   padding: 2rem;
-  visibility: hidden;
+  visibility: ${(props) => (props.show ? "" : "hidden")};
+  z-index: 10;
 `;
 const TitleC = styled.div`
   display: flex;
@@ -22,12 +23,15 @@ const Title = styled.h3`
   font-size: 2rem;
   color: ${(props) => props.theme.DarkText};
 `;
-function Rules() {
+const IconClose = styled.img`
+  cursor: pointer;
+`;
+function Rules({ show, setShow }) {
   return (
-    <Container>
+    <Container show={show}>
       <TitleC>
         <Title>RULES</Title>
-        <img src={close} alt="" />
+        <IconClose onClick={() => setShow(false)} src={close} alt="" />
       </TitleC>
       <img src={rules} alt="" />
     </Container>

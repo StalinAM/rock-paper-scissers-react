@@ -14,23 +14,43 @@ const Container = styled.div`
   padding: 2rem 8rem;
   min-height: 100vh;
   background: ${(props) => props.theme.RadialGradient};
+  filter: ${(props) => (props.show ? "brightness(40%)" : "")};
+  pointer-events: ${(props) => (props.show ? "none" : "")};
+`;
+const BtnRules = styled.button`
+  font-size: 1rem;
+  position: absolute;
+  right: 2rem;
+  bottom: 2rem;
+  background: none;
+  padding: 0.6rem 1.7rem;
+  border-radius: 0.5rem;
+  color: ${(props) => props.theme.White};
+  border: 1px solid ${(props) => props.theme.White};
+  letter-spacing: 8px;
+  &:hover {
+    background-color: ${(props) => props.theme.DarkText};
+    transform: scale(1.1);
+    transition: all 0.2s ease-in-out;
+  }
 `;
 function App() {
   const [show, setShow] = useState(false);
-  const handelClick = () => {};
+
   return (
     <>
       <GlobalStyles />
       <ThemeProvider theme={ColorTheme}>
-        <Container>
+        <Container show={show}>
           <Header />
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/play" element={<Play />} />
           </Routes>
-          <Rules />
           <Footer />
+          <BtnRules onClick={() => setShow(true)}>RULES</BtnRules>
         </Container>
+        <Rules show={show} setShow={setShow} />
       </ThemeProvider>
     </>
   );
