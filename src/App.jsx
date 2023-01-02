@@ -37,12 +37,13 @@ const BtnRules = styled.button`
 function App() {
   const [show, setShow] = useState(false);
   const [selection, setSelection] = useState();
+  const [score, setScore] = useState(0);
   return (
     <>
       <GlobalStyles />
       <ThemeProvider theme={ColorTheme}>
         <Container show={show}>
-          <Header />
+          <Header score={score} />
           <Routes>
             <Route
               exact
@@ -52,7 +53,9 @@ function App() {
             <Route
               exact
               path="/play"
-              element={<Play selection={selection} />}
+              element={
+                <Play selection={selection} score={score} setScore={setScore} />
+              }
             />
           </Routes>
           <Footer />

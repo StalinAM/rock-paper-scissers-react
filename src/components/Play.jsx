@@ -1,9 +1,15 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Item from "./Item";
 import styled from "styled-components";
-import { themeRock, themePaper, themeScissors } from "../style/ColorItems";
+import {
+  themeRock,
+  themePaper,
+  themeScissors,
+  Items,
+} from "../style/ColorItems";
 const Container = styled.div`
+  max-width: 50rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -41,7 +47,49 @@ const LinkBtn = styled(Link)`
     color: hsl(349, 71%, 52%);
   }
 `;
-function Play({ selection }) {
+function Play({ selection, score, setScore }) {
+  const [house, setHouse] = useState({});
+  const [result, setResult] = useState("");
+  const houseSelection = () => {
+    const random = Math.floor(Math.random() * 3) + 1;
+    const themeFilter = Items.filter((item) => {
+      return item.id == random;
+    });
+    setHouse(themeFilter[0]);
+  };
+  useEffect(() => {
+    houseSelection();
+  }, []);
+
+  const possibleResults = () => {
+    if (selection.id == house.id) {
+      setResult("DRAW");
+    }
+    if (selection.id == 1 && house.id == 2) {
+      setScore(score - 1);
+      setHouse("YOU LOSE");
+    }
+    if (selection.id == 1 && house.id == 3) {
+      setScore(score + 1);
+      setHouse("YOU WIN");
+    }
+    if (selection.id == 2 && house.id == 1) {
+      setScore(score + 1);
+      setHouse("YOU WIN");
+    }
+    if (selection.id == 2 && house.id == 3) {
+      setScore(score - 1);
+      setHouse("YOU LOSE");
+    }
+    if (selection.id == 3 && house.id == 1) {
+      setScore(score - 1);
+      setHouse("YOU LOSE");
+    }
+    if (selection.id == 3 && house.id == 2) {
+      setScore(score + 1);
+      setHouse("YOU WIN");
+    }
+  };
   return (
     <Container>
       <Cart>
@@ -49,12 +97,12 @@ function Play({ selection }) {
         <Item theme={selection} />
       </Cart>
       <Again>
-        <Lose>YOU WIN</Lose>
+        <Lose>{result}</Lose>
         <LinkBtn to="/">PLAY AGAIN</LinkBtn>
       </Again>
       <Cart>
         <Title>THE HOUSE PICKED</Title>
-        <Item theme={themePaper} />
+        <Item theme={house} />
       </Cart>
     </Container>
   );

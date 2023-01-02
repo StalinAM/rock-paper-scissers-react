@@ -31,13 +31,13 @@ const Score = styled.h1`
   color: ${(props) => props.theme.DarkText};
   font-size: 4.5rem;
 `;
-function Header() {
+function Header({ score }) {
   return (
     <Container>
       <Title src={Logo} alt="" />
       <ScoreC>
         <Tag>SCORE</Tag>
-        <Score>12</Score>
+        <Score>{score}</Score>
       </ScoreC>
     </Container>
   );
