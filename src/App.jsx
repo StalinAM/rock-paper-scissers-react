@@ -36,7 +36,7 @@ const BtnRules = styled.button`
 `;
 function App() {
   const [show, setShow] = useState(false);
-
+  const [selection, setSelection] = useState();
   return (
     <>
       <GlobalStyles />
@@ -44,8 +44,16 @@ function App() {
         <Container show={show}>
           <Header />
           <Routes>
-            <Route path="/" element={<Main />} />
-            <Route path="/play" element={<Play />} />
+            <Route
+              exact
+              path="/"
+              element={<Main setSelection={setSelection} />}
+            />
+            <Route
+              exact
+              path="/play"
+              element={<Play selection={selection} />}
+            />
           </Routes>
           <Footer />
           <BtnRules onClick={() => setShow(true)}>RULES</BtnRules>

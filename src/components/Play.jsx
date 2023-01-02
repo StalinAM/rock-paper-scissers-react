@@ -41,12 +41,12 @@ const LinkBtn = styled(Link)`
     color: hsl(349, 71%, 52%);
   }
 `;
-function Play() {
+function Play({ selection }) {
   return (
     <Container>
       <Cart>
         <Title>YOU PICKED</Title>
-        <Item theme={themeRock} />
+        <Item theme={selection} />
       </Cart>
       <Again>
         <Lose>YOU WIN</Lose>

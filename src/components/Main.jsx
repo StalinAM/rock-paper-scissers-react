@@ -1,5 +1,4 @@
-import React from "react";
-
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import TriangleBG from "../assets/bg-triangle.svg";
 import Element from "./Element";
@@ -15,12 +14,27 @@ const Container = styled.main`
   background-position: center;
   background-repeat: no-repeat;
 `;
-function Main() {
+function Main({ setSelection }) {
   return (
     <Container>
-      <Element theme={themePaper} top={"0"} left={"0"} />
-      <Element theme={themeScissors} top={"0"} right={"0"} />
-      <Element theme={themeRock} left={"calc(50% - 5.5rem)"} bottom={"0"} />
+      <Element
+        theme={themePaper}
+        top={"0"}
+        left={"0"}
+        setSelection={setSelection}
+      />
+      <Element
+        theme={themeScissors}
+        top={"0"}
+        right={"0"}
+        setSelection={setSelection}
+      />
+      <Element
+        theme={themeRock}
+        left={"calc(50% - 5.5rem)"}
+        bottom={"0"}
+        setSelection={setSelection}
+      />
     </Container>
   );
 }
