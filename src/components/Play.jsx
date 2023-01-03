@@ -2,12 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Item from "./Item";
 import styled from "styled-components";
-import {
-  themeRock,
-  themePaper,
-  themeScissors,
-  Items,
-} from "../style/ColorItems";
+import { Items } from "../style/ColorItems";
 const Container = styled.div`
   max-width: 50rem;
   display: flex;
@@ -47,9 +42,17 @@ const LinkBtn = styled(Link)`
     color: hsl(349, 71%, 52%);
   }
 `;
+const BoxWin = styled.div`
+border-radius: 50%;
+  box-shadow: ${(props) => (props.win ? "inset 0 5px 6px grey, 0 8px #a46e0a, 0 0 0 50px hsl(0deg 0% 100% / 7%), 0 0 0 100px hsl(0deg 0% 100% / 5%), 0 0 0 150px hsl(0deg 0% 100% / 3%);" : "")};
+`;
 function Play({ selection, score, setScore }) {
   const [house, setHouse] = useState({});
   const [result, setResult] = useState("");
+  const [left, setLeft] = useState(false);
+  const [right, setRight] = useState(false);
+  const [counter, setCounter] = useState(3);
+
   const houseSelection = () => {
     const random = Math.floor(Math.random() * 3) + 1;
     const themeFilter = Items.filter((item) => {
@@ -60,41 +63,43 @@ function Play({ selection, score, setScore }) {
   useEffect(() => {
     houseSelection();
   }, []);
-
   const possibleResults = () => {
     if (selection.id == house.id) {
       setResult("DRAW");
-    }
-    if (selection.id == 1 && house.id == 2) {
+      setLeft(false);
+      setRight(false);
+    } else if (
+      (selection.id == 1 && house.id == 2) ||
+      (selection.id == 2 && house.id == 3) ||
+      (selection.id == 3 && house.id == 1)
+    ) {
       setScore(score - 1);
-      setHouse("YOU LOSE");
-    }
-    if (selection.id == 1 && house.id == 3) {
+      setResult("YOU LOSE");
+      setLeft(false);
+      setRight(true);
+    } else if (
+      (selection.id == 1 && house.id == 3) ||
+      (selection.id == 2 && house.id == 1) ||
+      (selection.id == 3 && house.id == 2)
+    ) {
       setScore(score + 1);
-      setHouse("YOU WIN");
-    }
-    if (selection.id == 2 && house.id == 1) {
-      setScore(score + 1);
-      setHouse("YOU WIN");
-    }
-    if (selection.id == 2 && house.id == 3) {
-      setScore(score - 1);
-      setHouse("YOU LOSE");
-    }
-    if (selection.id == 3 && house.id == 1) {
-      setScore(score - 1);
-      setHouse("YOU LOSE");
-    }
-    if (selection.id == 3 && house.id == 2) {
-      setScore(score + 1);
-      setHouse("YOU WIN");
+      setResult("YOU WIN");
+      setRight(false);
+      setLeft(true);
     }
   };
+
+  useEffect(() => {
+    possibleResults();
+  }, [house]);
+  console.log(result);
   return (
     <Container>
       <Cart>
         <Title>YOU PICKED</Title>
-        <Item theme={selection} />
+        <BoxWin win={left}>
+          <Item theme={selection} />
+        </BoxWin>
       </Cart>
       <Again>
         <Lose>{result}</Lose>
@@ -102,7 +107,9 @@ function Play({ selection, score, setScore }) {
       </Again>
       <Cart>
         <Title>THE HOUSE PICKED</Title>
-        <Item theme={house} />
+        <BoxWin win={right}>
+          <Item theme={house} />
+        </BoxWin>
       </Cart>
     </Container>
   );
