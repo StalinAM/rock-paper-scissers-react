@@ -14,6 +14,10 @@ const Container = styled.header`
   @media screen and (max-width: 750px) {
     width: 100%;
   }
+  @media screen and (max-width: 360px) {
+    flex-direction: column;
+    gap: 1rem;
+  }
 `;
 const Title = styled.img`
   @media screen and (max-width: 600px) {

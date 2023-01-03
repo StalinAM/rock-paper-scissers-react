@@ -1,11 +1,13 @@
-import { useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import Item from "./Item";
 
 const LinkTo = styled(Link)`
-  transform: translateX(${(props) => props.right});
+  transform: translateX(${(props) => props.right}rem);
   border-radius: 50%;
+  @media screen and (max-width: 600px) {
+    transform: translateX(${(props) => (props.right == 8 ? "6rem" : "")});
+  }
 `;
 const Box = styled.div`
   &:hover {
@@ -19,12 +21,12 @@ const Box = styled.div`
     }
   }
 `;
-function Element({ theme, right, setSelection }) {
+function Element({ theme, setSelection }) {
   const setItem = () => {
     setSelection(theme);
   };
   return (
-    <LinkTo to="/play" right={right} onClick={setItem}>
+    <LinkTo to="/play" right={theme.right} onClick={setItem}>
       <Box>
         <Item theme={theme} />
       </Box>
