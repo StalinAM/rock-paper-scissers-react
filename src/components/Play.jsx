@@ -7,19 +7,22 @@ const Container = styled.div`
   max-width: 50rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   margin: 8rem auto 0;
+  gap: 5rem;
 `;
 const Cart = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 3rem;
+  transform: scale(1.3);
 `;
 const Title = styled.h5`
   color: ${(props) => props.theme.White};
   font-size: 1.3rem;
   letter-spacing: 3px;
+  text-align: center;
 `;
 const Again = styled.div`
   display: flex;
@@ -27,6 +30,7 @@ const Again = styled.div`
   align-items: center;
   justify-content: center;
   gap: 1rem;
+  text-align: center;
 `;
 const Lose = styled.h4`
   font-size: 3rem;
@@ -43,8 +47,19 @@ const LinkBtn = styled(Link)`
   }
 `;
 const BoxWin = styled.div`
-border-radius: 50%;
-  box-shadow: ${(props) => (props.win ? "inset 0 5px 6px grey, 0 8px #a46e0a, 0 0 0 50px hsl(0deg 0% 100% / 7%), 0 0 0 100px hsl(0deg 0% 100% / 5%), 0 0 0 150px hsl(0deg 0% 100% / 3%);" : "")};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 8rem;
+  color: ${(props) => props.theme.White};
+  width: 11rem;
+  height: 11rem;
+  background-color: ${(props) => props.theme.DarkText};
+  border-radius: 50%;
+  box-shadow: ${(props) =>
+    props.win
+      ? "inset 0 5px 6px grey, 0 8px hsl(229deg 25% 31%), 0 0 0 50px hsl(0deg 0% 100% / 7%), 0 0 0 100px hsl(0deg 0% 100% / 5%), 0 0 0 150px hsl(0deg 0% 100% / 3%);"
+      : ""};
 `;
 function Play({ selection, score, setScore }) {
   const [house, setHouse] = useState({});
@@ -90,9 +105,17 @@ function Play({ selection, score, setScore }) {
   };
 
   useEffect(() => {
-    possibleResults();
-  }, [house]);
-  console.log(result);
+    const timer =
+      counter > 0
+        ? setInterval(() => {
+            setCounter(counter - 1);
+          }, 1000)
+        : possibleResults();
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, [counter, house]);
   return (
     <Container>
       <Cart>
@@ -101,14 +124,16 @@ function Play({ selection, score, setScore }) {
           <Item theme={selection} />
         </BoxWin>
       </Cart>
-      <Again>
-        <Lose>{result}</Lose>
-        <LinkBtn to="/">PLAY AGAIN</LinkBtn>
-      </Again>
+      {counter == 0 && (
+        <Again>
+          <Lose>{result}</Lose>
+          <LinkBtn to="/">PLAY AGAIN</LinkBtn>
+        </Again>
+      )}
       <Cart>
         <Title>THE HOUSE PICKED</Title>
         <BoxWin win={right}>
-          <Item theme={house} />
+          {counter == 0 ? <Item theme={house} /> : counter}
         </BoxWin>
       </Cart>
     </Container>

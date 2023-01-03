@@ -16,6 +16,9 @@ const Container = styled.div`
   background: ${(props) => props.theme.RadialGradient};
   filter: ${(props) => (props.show ? "brightness(40%)" : "")};
   pointer-events: ${(props) => (props.show ? "none" : "")};
+  @media screen and (max-width: 830px) {
+    padding: 2rem 4rem;
+  }
 `;
 const BtnRules = styled.button`
   font-size: 1rem;
