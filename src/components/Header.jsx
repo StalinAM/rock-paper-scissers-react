@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Logo from "../assets/logo.svg";
 
 const Container = styled.header`
-  max-width: 44rem;
+  width: 90%;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -11,8 +11,15 @@ const Container = styled.header`
   border-radius: 1rem;
   padding: 1.5rem;
   margin: 0 auto;
+  @media screen and (max-width: 750px) {
+    width: 100%;
+  }
 `;
-const Title = styled.img``;
+const Title = styled.img`
+  @media screen and (max-width: 600px) {
+    width: 7rem;
+  }
+`;
 const ScoreC = styled.div`
   background-color: ${(props) => props.theme.White};
   border-radius: 0.5rem;
@@ -21,6 +28,9 @@ const ScoreC = styled.div`
   align-items: center;
   justify-content: center;
   padding: 0.5rem 3.5rem;
+  @media screen and (max-width: 600px) {
+    padding: 0.5rem 1.5rem;
+  }
 `;
 const Tag = styled.h2`
   color: ${(props) => props.theme.ScoreText};
@@ -30,6 +40,9 @@ const Tag = styled.h2`
 const Score = styled.h1`
   color: ${(props) => props.theme.DarkText};
   font-size: 4.5rem;
+  @media screen and (max-width: 600px) {
+    font-size: 3rem;
+  }
 `;
 function Header({ score }) {
   return (

@@ -2,10 +2,6 @@ import React from "react";
 import styled from "styled-components";
 const Container = styled.footer`
   text-align: center;
-  position: absolute;
-  bottom: 1rem;
-  left: 50%;
-  transform: translate(-50%, 0);
 `;
 const Atribution = styled.p`
   letter-spacing: 2px;

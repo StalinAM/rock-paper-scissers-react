@@ -5,11 +5,15 @@ import styled from "styled-components";
 import { Items } from "../style/ColorItems";
 const Container = styled.div`
   max-width: 50rem;
-  display: flex;
-  align-items: center;
+  display: grid;
   justify-content: center;
-  margin: 8rem auto 0;
+  align-items: center;
+  grid-template-columns: ${(props) =>
+    props.counter != 0 ? "repeat(2, 1fr)" : "repeat(3, 1fr)"};
   gap: 5rem;
+  @media screen and (max-width: 750px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
 `;
 const Cart = styled.div`
   display: flex;
@@ -17,6 +21,12 @@ const Cart = styled.div`
   align-items: center;
   gap: 3rem;
   transform: scale(1.3);
+  @media screen and (max-width: 830px) {
+    transform: scale(1);
+  }
+  @media screen and (max-width: 600px) {
+    flex-direction: column-reverse;
+  }
 `;
 const Title = styled.h5`
   color: ${(props) => props.theme.White};
@@ -31,6 +41,10 @@ const Again = styled.div`
   justify-content: center;
   gap: 1rem;
   text-align: center;
+  @media screen and (max-width: 750px) {
+    grid-row-start: 2;
+    grid-column: 1/3;
+  }
 `;
 const Lose = styled.h4`
   font-size: 3rem;
@@ -60,6 +74,11 @@ const BoxWin = styled.div`
     props.win
       ? "inset 0 5px 6px grey, 0 8px hsl(229deg 25% 31%), 0 0 0 50px hsl(0deg 0% 100% / 7%), 0 0 0 100px hsl(0deg 0% 100% / 5%), 0 0 0 150px hsl(0deg 0% 100% / 3%);"
       : ""};
+  @media screen and (max-width: 600px) {
+    width: 8rem;
+    height: 8rem;
+    font-size: 6rem;
+  }
 `;
 function Play({ selection, score, setScore }) {
   const [house, setHouse] = useState({});
@@ -117,7 +136,7 @@ function Play({ selection, score, setScore }) {
     };
   }, [counter, house]);
   return (
-    <Container>
+    <Container counter={counter}>
       <Cart>
         <Title>YOU PICKED</Title>
         <BoxWin win={left}>

@@ -12,6 +12,9 @@ const Container = styled.div`
   padding: 2rem;
   visibility: ${(props) => (props.show ? "" : "hidden")};
   z-index: 10;
+  @media screen and (max-width: 415px) {
+    padding: 1rem;
+  }
 `;
 const TitleC = styled.div`
   display: flex;

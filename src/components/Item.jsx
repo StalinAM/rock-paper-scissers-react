@@ -10,6 +10,9 @@ const BorderD = styled.div`
   align-items: center;
   justify-content: center;
   box-shadow: 0px 5px 0px 1px ${(props) => props.color};
+  @media screen and (max-width: 600px) {
+    transform: scale(0.7);
+  }
 `;
 const Container = styled.div`
   background-color: ${(props) => props.theme.White};
