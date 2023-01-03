@@ -210,12 +210,13 @@ Error generating stack: `+o.message+`
   max-width: 50rem;
   display: grid;
   justify-content: center;
-  align-items: start;
+  align-items: center;
   grid-template-columns: ${e=>e.counter!=0?"repeat(2, 1fr)":"repeat(3, 1fr)"};
   gap: 5rem;
   @media screen and (max-width: 750px) {
     gap: 3rem;
     grid-template-columns: repeat(2, 1fr);
+    align-items: flex-start;
   }
 `,sc=ee.div`
   display: flex;
