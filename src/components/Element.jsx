@@ -26,7 +26,7 @@ function Element({ theme, setSelection }) {
     setSelection(theme);
   };
   return (
-    <LinkTo to="/play" right={theme.right} onClick={setItem}>
+    <LinkTo to="/rock-paper-scissers-react/play" right={theme.right} onClick={setItem}>
       <Box>
         <Item theme={theme} />
       </Box>

@@ -7,7 +7,7 @@ const Container = styled.div`
   max-width: 50rem;
   display: grid;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   grid-template-columns: ${(props) =>
     props.counter != 0 ? "repeat(2, 1fr)" : "repeat(3, 1fr)"};
   gap: 5rem;
@@ -147,7 +147,7 @@ function Play({ selection, score, setScore }) {
       {counter == 0 && (
         <Again>
           <Lose>{result}</Lose>
-          <LinkBtn to="/">PLAY AGAIN</LinkBtn>
+          <LinkBtn to="/rock-paper-scissers-react/">PLAY AGAIN</LinkBtn>
         </Again>
       )}
       <Cart>

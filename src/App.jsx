@@ -61,12 +61,12 @@ function App() {
           <Routes>
             <Route
               exact
-              path="/"
+              path="/rock-paper-scissers-react/"
               element={<Main setSelection={setSelection} />}
             />
             <Route
               exact
-              path="/play"
+              path="/rock-paper-scissers-react/play"
               element={
                 <Play selection={selection} score={score} setScore={setScore} />
               }
